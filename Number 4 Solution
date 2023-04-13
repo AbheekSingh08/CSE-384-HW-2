@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <string.h>
+
+
+
+
+void avgsalarycalc(long long sumsal, int numepl ){
+   if (numepl >= 1) {
+       double averageSalary = (double)sumsal / (double)numepl;
+       printf("Average Salary: %.2f\n", averageSalary);
+   } else {
+       printf("Not Enough Employees\n");
+   }
+}
+
+
+
+
+int main() {
+   FILE *dbfile;
+   char fn[100]; // first name of employee
+   char ln[100];// last name of employee
+   int empsal; // employee salary
+   int numempl = 0; //number of employees
+   int sumsal = 0; // sum of all salaries
+
+
+
+
+   dbfile = fopen("db.txt", "r");
+   if (dbfile == NULL) {
+       printf("Error with Opening File\n");
+       return 1;
+   }
+   while (fscanf(dbfile, "%s %s %d", fn, ln, &empsal) == 3) {
+       sumsal = sumsal + empsal;
+       numempl = numempl + 1;
+   }
+
+
+
+
+   fclose(dbfile);
+
+
+
+
+   avgsalarycalc(sumsal,numempl);
+
+
+
+
+   return 0;
+
+
+
+
+}

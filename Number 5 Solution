@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+
+
+void revstring(char *string);
+
+
+int main(){
+   FILE *input = fopen("input.txt", "r");
+   FILE *output = fopen("output.txt", "w");
+
+
+   char newbuff[1024];
+
+
+   while (fgets(newbuff, sizeof(newbuff), input)){
+       int len = strlen(newbuff);
+       if (len > 0 && (newbuff[len - 1] == '\n' || newbuff[len - 1] == '\r')) {
+           newbuff[len - 1] = '\0';
+           len--;
+       }
+       if (len > 0 && newbuff[len - 1] == '\r') {
+           newbuff[len - 1] = '\0';
+       }
+       int i = strspn(newbuff, " \t");
+       revstring(newbuff + i);
+       fprintf(output, "%s\n", newbuff + i);
+   }
+   fclose(input);
+   fclose(output);
+
+
+   return 0;
+}

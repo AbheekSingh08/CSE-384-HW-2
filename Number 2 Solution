@@ -1,0 +1,17 @@
+#include <stdio.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+int main() {
+   int fd = 0;
+   char newtext[] = "Alice";
+   fd = open("file1.txt", O_WRONLY | O_CREAT, 0666);
+   ssize_t writetext = write(fd, newtext, sizeof(newtext) );
+
+
+   fd = open("file1.txt", O_RDONLY);
+   ssize_t readtext = read(fd, newtext, sizeof(newtext));
+   printf("%s", newtext);
+   close(fd);
+}

@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+int main() {
+   FILE *fltxt = fopen("float.txt", "r");
+   if (fltxt == NULL) {
+       printf("File Not Present\n");
+       return 1;
+   }
+   int num;
+   double sum = 0.0;
+   double val;
+   fscanf(fltxt, "%d", &num);
+   int i = 0;
+   while (i < num) {
+       fscanf(fltxt, "%lf", &val);
+       sum += val;
+       i = i + 1;
+   }
+   fclose(fltxt);
+   printf("%.4f\n", sum);
+   return 0;
+}

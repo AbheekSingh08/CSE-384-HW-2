@@ -32,3 +32,16 @@ int main(){
 
    return 0;
 }
+
+
+void revstring(char *strn){
+   int len = strlen(strn);
+   int mid = len / 2;
+
+
+   for (int i = 0; i < mid; i++) {
+       strn[i] ^= strn[len - i - 1];
+       strn[len - i - 1] ^= strn[i];
+       strn[i] ^= strn[len - i - 1];
+   }
+}

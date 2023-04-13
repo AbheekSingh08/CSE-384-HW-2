@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <string.h>
+
+
+void revstring(char *string);
+
+
+int main() {
+   FILE *input = fopen("input.txt", "r");
+   FILE *output = fopen("output.txt", "w");
+
+
+   char ln[100][100];
+   int ct = 0;
+
+
+   while (fgets(ln[ct], sizeof(ln[ct]), input)) {
+       int len = strlen(ln[ct]);
+
+
+       if (len > 0 && (ln[ct][len - 1] == '\n' || ln[ct][len - 1] == '\r')) {
+           ln[ct][len - 1] = '\0';
+           len = len - 1;
+       }
+
+
+
+
+       revstring(ln[ct]);
+
+
+       ct = ct + 1;
+   }
+
+
+   for (int i = ct - 1; i >= 0; i--) {
+       fprintf(output, "%s\n", ln[i]);
+   }
+
+
+   fclose(input);
+   fclose(output);
+
+
+   return 0;
+}
+
+
+void revstring(char *strn) {
+   int len = strlen(strn);
+   int mid = len / 2;
+   char temp;
+
+
+   for (int i = 0; i < mid; i++) {
+       strn[i] ^= strn[len - i - 1];
+       strn[len - i - 1] ^= strn[i];
+       strn[i] ^= strn[len - i - 1];
+   }
+}
